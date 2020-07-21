@@ -1,3 +1,8 @@
+//Baekjoon no.10828
+// stack
+// Minju Kim
+// using stack
+
 #include <iostream>
 #include <stack>
 #include <cstring>
