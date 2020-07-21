@@ -4,9 +4,9 @@
 // using bfs
 
 #include <iostream>
-#include <string>
 #include <queue>
 #include <algorithm>
+#include <stdio.h>
 
 using namespace std;
 
@@ -22,9 +22,8 @@ int main() {
 	cin >> num;
 
 	for (int i = 0; i < num; i++) {
-		cin >> temp;
 		for (int j = 0; j < num; j++) {
-			mat[i][j] = stoi(temp.substr(j, 1));
+			scanf_s("%1d", &mat[i][j]);
 		}
 	}
 
