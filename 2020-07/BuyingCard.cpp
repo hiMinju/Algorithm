@@ -1,49 +1,32 @@
 // Baekjoon no.11052
 // First Write: 2019.05.07
-// Last Write: 2020.07.21
+// Last Write: 2020.07.23
 // Minju Kim
-// using 
+// using dp
+// bottom up
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
-
+int d[10001] = { 0 };
+int arr[10001];
+	
 int main() {
-	vector<int> arr;
-	vector<double> unit_arr;
-	int temp = 0;
 	int num = 0;
-	double max = 0;
-	int max_index = 0;
-	int count = 0;
-	int remainder = 0;
-	int total = 0;
 	cin >> num;
 
-	for (int i = 0; i < num; i++) {
-		cin >> temp;
-		arr.push_back(temp);
-		unit_arr.push_back((double)arr[i] /(i + 1));
+	for (int i = 1; i <= num; i++) {
+		cin >> arr[i];
 	}
 
-	for (int i = 0; i < num; i++) {
-		if (max < unit_arr[i]) {
-			max = unit_arr[i];
-			max_index = i;
+	for (int i = 1; i <= num; i++) {
+		for (int j = 1; j <= i; j++) {
+			d[i] = max(d[i], d[i - j] + arr[j]);
 		}
 	}
-
-	count = num / (max_index + 1);
-	remainder = num - (count * (max_index + 1));
-
-	if ((num % (max_index + 1) == 0)) {
-		total = (int)arr[max_index] * count;
-	}
-	else {
-		total = (int)arr[max_index] * count + arr[remainder - 1];
-	}
-	cout << total;
+	cout << d[num] << endl;
 
 	return 0;
 }
