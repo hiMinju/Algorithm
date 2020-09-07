@@ -8,7 +8,7 @@ stack<int> bascket;
 int answer = 0;
 
 void recheck(int n) {
-    if (bascket.top() == n) {
+    if (!bascket.empty() && bascket.top() == n) {
         bascket.pop();
         answer += 2;
         recheck(n);
@@ -16,13 +16,10 @@ void recheck(int n) {
 }
 
 void check(int n) {
-    if (bascket.empty()) {
+    if (bascket.empty() || bascket.top() != n) {
         bascket.push(n);
     }
-    else if (bascket.top() != n) {
-        bascket.push(n);
-    }
-    else {
+    else if (bascket.top() == n) {
         recheck(n);
     }
 }
@@ -31,10 +28,11 @@ int solution(vector<vector<int>> board, vector<int> moves) {
     int n = board.size();
     for (int i = 0; i < moves.size(); i++) {
         for (int j = 0; j < n; j++) {
-            if (board[j][moves[i] - 1] != 0) {
-                check(board[j][moves[i] - 1]);
+            int move = moves[i] - 1;
+            if (board[j][move] != 0) {
+                check(board[j][move]);
 
-                board[j][moves[i] - 1] = 0;
+                board[j][move] = 0;
                 break;
             }
         }
