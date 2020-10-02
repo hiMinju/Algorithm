@@ -1,2 +1,2 @@
 language = "python3"
-run = ""
+run = "./2020-10/MakeNo1.py"
