@@ -3,21 +3,19 @@
 # Minju Kim
 # 유기농 배추
 
-import sys
-sys.setrecursionlimit(50000)
-direction = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+def dfs(y,x):
+  if x < 0 or x >= len(mat[0]) or y < 0 or y >= len(mat):
+    return False
 
-def checkDir(y,x):
-  for dir in direction:
-    temp_x = x + dir[0]
-    temp_y = y + dir[1]
-    if temp_x < 0 or temp_x >= len(mat[0]) or temp_y < 0 or temp_y >= len(mat):
-      continue
+  if mat[y][x] == 1:
+    mat[y][x] = 2
+    dfs(y - 1, x)
+    dfs(y, x - 1)
+    dfs(y + 1, x)
+    dfs(y, x + 1)
+    return True
+  return False
 
-    if mat[temp_y][temp_x] == 1:
-      mat[temp_y][temp_x] = 2
-      checkDir(temp_y, temp_x)
-  
 t = int(input())
 for _ in range(t):
   # 테스트 케이스 만큼 반복
@@ -30,8 +28,6 @@ for _ in range(t):
     mat[y][x] = 1
   for i in range(n):
     for j in range(m):
-      if mat[i][j] == 1:
-        mat[i][j] = 2
-        checkDir(i, j) # i: y j: x
+      if dfs(i, j) == True:
         result += 1
   print(result)
